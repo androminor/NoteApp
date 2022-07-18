@@ -59,18 +59,17 @@ class EditNoteActivity : AppCompatActivity() {
                     updatedNote.id = noteID
                     viewModel.updateNote(updatedNote)
                     Toast.makeText(this, "Note is Updated", Toast.LENGTH_LONG).show()
+
                 }
             }
                 else {
-                    if(noteTitles.isNotEmpty() && noteDesc.isNotEmpty())
-                    {
-                        val sdf = SimpleDateFormat("dd MMM, yyyy - HH:mm")
+                       val sdf = SimpleDateFormat("dd MMM, yyyy - HH:mm")
                         val currentDate:String = sdf.format(Date())
                         val updatedNote = Notes(noteTitles, noteDesc,currentDate)
                         updatedNote.id = noteID
                         viewModel.addNote(Notes(noteTitles,noteDesc,currentDate))
                         Toast.makeText(this,"Note is Added", Toast.LENGTH_LONG).show()
-                    }
+
                 }
             startActivity(Intent(applicationContext,MainActivity::class.java))
             }

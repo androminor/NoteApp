@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.task.noteapp.R
 import com.task.noteapp.databinding.NoteItemsBinding
 import com.task.noteapp.model.Notes
 import com.task.noteapp.utility.showShortSnack
@@ -40,23 +39,32 @@ class NoteRecycleViewAdapter(
 
         with(holder)
         {
-            title.setText(itemsView.noteTitle)
-            desc.setText(itemsView.noteDescription)
-            time.setText("Edited   "+  itemsView.timeStamp)
+            title.text = itemsView.noteTitle
+            desc.text = itemsView.noteDescription
+            time.text = "Created   " + itemsView.timeStamp
+
+           binding.apply {
+               root.setOnClickListener {
+                   clickInterface.onNoteClicking(itemsView)
+                   title.text = itemsView.noteTitle
+                   desc.text = itemsView.noteDescription
+                   binding.idTime.text = "Updated   " + itemsView.timeStamp
+
+               }
+           }
 
             deleteButton.setOnClickListener {
                 deletedInterface.onDeleteClicking(itemsView)
 
                 binding.idDelete.showShortSnack("Deleted")
 
-            }
 
-            binding.root.setOnClickListener {
-                clickInterface.onNoteClicking(itemsView)
+
+
+
 
             }
         }
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
